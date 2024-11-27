@@ -1,0 +1,6 @@
+station_id: 1
+device: Q7
+hostname: localhost
+username: petalinux
+password: petalinux
+tty: /dev/ttyUSB0

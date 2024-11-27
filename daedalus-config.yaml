@@ -1,0 +1,6 @@
+station_id: 1
+device: Daedalus
+hostname: localhost
+username: petalinux
+password: petalinux
+tty: /dev/ttyUSB0
