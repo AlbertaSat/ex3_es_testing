@@ -4,3 +4,9 @@ hostname: localhost
 username: petalinux
 password: petalinux
 tty: /dev/ttyUSB0
+
+use_helper: true
+helper_tty: /dev/ttyUSB1
+helper_hostname: localhost
+helper_username: petalinux
+helper_password: petalinux
