@@ -9,7 +9,7 @@ CONF = configuration.CONF
 TTY = CONF.declare(
     'tty',
     description='The serial port to use for communication',
-    default='/dev/ttyUSB0',
+    default_value='/dev/ttyUSB0',
 )
 
 class SerialPlug(BasePlug):
@@ -67,4 +67,4 @@ def test_serial_connection(test, serial):
 # Example usage
 if __name__ == '__main__':
     test = htf.Test(test_serial_connection)
-    test.execute(test_start=htf.plugs.user_input.prompt_for_test_start())
+    test.execute()
