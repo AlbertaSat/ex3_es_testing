@@ -32,23 +32,36 @@ import subprocess
 import sys
 import time
 
-# Partition specification from ICD Table 5
+# Unit constants
+BYTES_PER_KB = 1000
+BYTES_PER_MB = 1000 ** 2
+BYTES_PER_GB = 1000 ** 3
+BYTES_PER_GIB = 1024 ** 3
+MIB_PER_GIB = 1024
 
+# Partition specification from ICD Table 5 (decimal GB)
 PARTITIONS = [
     {"name": "Housekeeping", "label": "hk",   "size_gb": 3},
-    {"name": "Logs",         "label": "logs",  "size_gb": 3},
-    {"name": "Software",     "label": "fsw",   "size_gb": 10},
-    {"name": "Iris",         "label": "iris",  "size_gb": 10},
-    {"name": "DFGM",         "label": "dfgm",  "size_gb": 6},
+    {"name": "Logs",         "label": "logs", "size_gb": 3},
+    {"name": "Software",     "label": "fsw",  "size_gb": 10},
+    {"name": "Iris",         "label": "iris", "size_gb": 10},
+    {"name": "DFGM",         "label": "dfgm", "size_gb": 6},
 ]
-
-TOTAL_REQUIRED_GB = sum(p["size_gb"] for p in PARTITIONS)  # 32 GB
 
 ROLE_LABEL_PREFIX = {
     "primary": "storage",
     "backup":  "backup",
 }
 
+TOTAL_REQUIRED_GB = sum(p["size_gb"] for p in PARTITIONS)  # 32 GB
+
+def gb_to_mib_for_parted(gb):
+    """
+    Convert decimal GB to MiB for parted boundaries.
+    parted expects MiB when using the MiB suffix.
+    """
+    bytes_count = gb * BYTES_PER_GB
+    return int(bytes_count / (1024 ** 2))  # floor to avoid over-allocation
 
 def fs_label(role, icd_label):
     """Return the full filesystem label for a partition, e.g. ex3_storage_hk."""
@@ -195,18 +208,18 @@ def validate_device_size(device):
     )
     size_bytes = int(result.stdout.strip())
 
-    size_gb_decimal = size_bytes / (1000 ** 3)   # GB (marketing units)
-    size_gib = size_bytes / (1024 ** 3)          # GiB (binary units)
-    required_bytes = TOTAL_REQUIRED_GB * (1000 ** 3)
+    size_gb = size_bytes / BYTES_PER_GB
+    size_gib = size_bytes / BYTES_PER_GIB
+    required_bytes = TOTAL_REQUIRED_GB * BYTES_PER_GB
 
-    print(f"\n  Device size: {size_gb_decimal:.1f} GB ({size_gib:.1f} GiB)")
+    print(f"\n  Device size: {size_gb:.1f} GB ({size_gib:.1f} GiB)")
     print(f"  Required:    {TOTAL_REQUIRED_GB} GB")
 
-    # keep existing 5% margin behavior
+    # Keep 5% margin behavior
     if size_bytes < required_bytes * 0.95:
         print(
             f"\nWARNING: Device may be too small "
-            f"({size_gb_decimal:.1f} GB < {TOTAL_REQUIRED_GB} GB required)."
+            f"({size_gb:.1f} GB < {TOTAL_REQUIRED_GB} GB required)."
         )
         confirm = input("Continue anyway? [y/N]: ").strip().lower()
         if confirm != "y":
@@ -273,7 +286,7 @@ def create_partitions(device, role):
     start_mb = 1  # 1 MB alignment offset
 
     for i, part in enumerate(PARTITIONS, start=1):
-        size_mb = part["size_gb"] * 1024
+        size_mb = gb_to_mib_for_parted(part["size_gb"])
         end_mb = start_mb + size_mb
         label = fs_label(role, part["label"])
 
