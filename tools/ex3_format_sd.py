@@ -63,6 +63,15 @@ def gb_to_mib_for_parted(gb):
     bytes_count = gb * BYTES_PER_GB
     return int(bytes_count / (1024 ** 2))  # floor to avoid over-allocation
 
+def device_size_mib(device):
+    """Return total device size in MiB (from lsblk bytes)."""
+    result = subprocess.run(
+        ["lsblk", "-b", "-d", "-o", "SIZE", "--noheadings", device],
+        capture_output=True, text=True, check=True
+    )
+    size_bytes = int(result.stdout.strip())
+    return size_bytes / (1024 ** 2)
+
 def fs_label(role, icd_label):
     """Return the full filesystem label for a partition, e.g. ex3_storage_hk."""
     return f"ex3_{ROLE_LABEL_PREFIX[role]}_{icd_label}"
@@ -283,12 +292,35 @@ def wipe_device(device):
 
 def create_partitions(device, role):
     print("\n[2/3] Creating partitions...")
-    start_mb = 1  # 1 MB alignment offset
+    start_mb = 1  # 1 MiB alignment offset
+
+    total_mib = device_size_mib(device)
+    # Leave a tiny buffer at disk end for alignment/metadata tolerance.
+    max_end_mb = int(total_mib) - 1
 
     for i, part in enumerate(PARTITIONS, start=1):
         size_mb = gb_to_mib_for_parted(part["size_gb"])
-        end_mb = start_mb + size_mb
+        requested_end_mb = start_mb + size_mb
+        end_mb = requested_end_mb
+        is_last = (i == len(PARTITIONS))
         label = fs_label(role, part["label"])
+
+        # If the last partition would exceed disk size, clamp to remaining space.
+        if is_last and requested_end_mb > max_end_mb:
+            if start_mb >= max_end_mb:
+                print(
+                    f"\nWARNING: Cannot create last partition {label}: "
+                    f"start ({start_mb} MiB) is beyond usable disk end ({max_end_mb} MiB)."
+                )
+                print("  Skipping final partition.")
+                break
+
+            print(
+                f"\nWARNING: Last partition {label} exceeds device boundary "
+                f"({requested_end_mb} MiB > {max_end_mb} MiB)."
+            )
+            print(f"  Adjusting end to {max_end_mb} MiB to fill remaining space.")
+            end_mb = max_end_mb
 
         print(f"\n  Partition {i}: {label}  ({part['size_gb']} GB)")
         run([
@@ -298,6 +330,7 @@ def create_partitions(device, role):
             f"{start_mb}MiB",
             f"{end_mb}MiB",
         ])
+
         start_mb = end_mb
 
     time.sleep(2)
