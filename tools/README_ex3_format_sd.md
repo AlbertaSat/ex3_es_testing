@@ -188,10 +188,10 @@ sudo python3 tools/ex3_format_sd.py --device /dev/sde --role primary
 
 ## Verifying the Result
 
-After the script completes, run the following to verify the partition layout:
+After the script completes, run the following to verify the partition layout with /dev/sdX replaced with the disk path you used:
 
 ```bash
-lsblk -o NAME,SIZE,FSTYPE,LABEL /dev/sde
+lsblk -o NAME,SIZE,FSTYPE,LABEL /dev/sdX
 ```
 
 Expected output (primary role):
@@ -199,11 +199,11 @@ Expected output (primary role):
 ```
 NAME     SIZE FSTYPE LABEL
 sde    114.6G
-├─sde1     3G ext4   ex3_storage_hk
-├─sde2     3G ext4   ex3_storage_logs
-├─sde3    10G ext4   ex3_storage_fsw
-├─sde4    10G ext4   ex3_storage_iris
-└─sde5     6G ext4   ex3_storage_dfgm
+├─sdX1     3G ext4   ex3_storage_hk
+├─sdX2     3G ext4   ex3_storage_logs
+├─sdX3    10G ext4   ex3_storage_fsw
+├─sdX4    10G ext4   ex3_storage_iris
+└─sdX5     6G ext4   ex3_storage_dfgm
 ```
 
 All 5 partitions should be present with the correct sizes, `ext4` filesystem, and correct labels.
