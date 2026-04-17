@@ -194,13 +194,20 @@ def validate_device_size(device):
         capture_output=True, text=True, check=True
     )
     size_bytes = int(result.stdout.strip())
-    size_gb = size_bytes / (1024 ** 3)
 
-    print(f"\n  Device size: {size_gb:.1f} GB")
+    size_gb_decimal = size_bytes / (1000 ** 3)   # GB (marketing units)
+    size_gib = size_bytes / (1024 ** 3)          # GiB (binary units)
+    required_bytes = TOTAL_REQUIRED_GB * (1000 ** 3)
+
+    print(f"\n  Device size: {size_gb_decimal:.1f} GB ({size_gib:.1f} GiB)")
     print(f"  Required:    {TOTAL_REQUIRED_GB} GB")
 
-    if size_gb < TOTAL_REQUIRED_GB * 0.95:
-        print(f"\nWARNING: Device may be too small ({size_gb:.1f} GB < {TOTAL_REQUIRED_GB} GB required).")
+    # keep existing 5% margin behavior
+    if size_bytes < required_bytes * 0.95:
+        print(
+            f"\nWARNING: Device may be too small "
+            f"({size_gb_decimal:.1f} GB < {TOTAL_REQUIRED_GB} GB required)."
+        )
         confirm = input("Continue anyway? [y/N]: ").strip().lower()
         if confirm != "y":
             print("Aborted.")
