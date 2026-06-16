@@ -10,15 +10,15 @@
 #include <zlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <time.h>
 #include <sys/ioctl.h>
 #include <linux/i2c-dev.h>
 #include <linux/i2c.h>
 #include <string.h>
 
 #define EEPROM_ADDR 0x50
-#define DATA_LEN 16 // 128 bytes (1Kbit) of data to write to EEPROM
+#define DATA_LEN 16 // 128 bits of data to write to EEPROM
 #define PAGE_SIZE 1
-
 
 int i2c_page_write(int file, unsigned char mem_addr, unsigned char *data, unsigned long len) {
     if (len > PAGE_SIZE) {
@@ -27,7 +27,7 @@ int i2c_page_write(int file, unsigned char mem_addr, unsigned char *data, unsign
     }
     
     // Buffer to hold memory address and data for page write
-    unsigned char buf[PAGE_SIZE + 2];
+    unsigned char buf[PAGE_SIZE + 1];
     buf[0] = mem_addr; // address
     memcpy(buf + 1, data, len);
 
@@ -64,6 +64,8 @@ int i2c_page_write(int file, unsigned char mem_addr, unsigned char *data, unsign
 
 
 int main(int argc, char *argv[]) {
+	srand(time(NULL));
+	
     if (argc < 2) {
         fprintf(stderr, "Usage: %s <bus_number>\n", argv[0]);
         return 1;
