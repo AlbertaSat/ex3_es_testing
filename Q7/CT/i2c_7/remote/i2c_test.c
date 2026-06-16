@@ -16,8 +16,8 @@
 #include <string.h>
 
 #define EEPROM_ADDR 0x50
-#define DATA_LEN 128 // 128 bytes (1Kbit) of data to write to EEPROM
-#define PAGE_SIZE 8
+#define DATA_LEN 16 // 128 bytes (1Kbit) of data to write to EEPROM
+#define PAGE_SIZE 1
 
 
 int i2c_page_write(int file, unsigned char mem_addr, unsigned char *data, unsigned long len) {
@@ -27,8 +27,8 @@ int i2c_page_write(int file, unsigned char mem_addr, unsigned char *data, unsign
     }
     
     // Buffer to hold memory address and data for page write
-    unsigned char buf[PAGE_SIZE + 1];
-    buf[0] = mem_addr; // memory address to write to
+    unsigned char buf[PAGE_SIZE + 2];
+    buf[0] = mem_addr; // address
     memcpy(buf + 1, data, len);
 
     struct i2c_msg msg = {
@@ -43,12 +43,21 @@ int i2c_page_write(int file, unsigned char mem_addr, unsigned char *data, unsign
         .nmsgs = 1
     };
 
+    printf("Sending message: ");
+    for (int i = 0; i < len + 1; i++) {
+        printf("%02x ", buf[i]);
+        if ((i + 1) % 16 == 0) {
+            printf("\n");
+        }
+    }
+    printf("\n");
+
     if (ioctl(file, I2C_RDWR, &ioctl_data) < 0) {
         perror("Failed to write to EEPROM");
         return -1;
     }
 
-    usleep(5000); // wait for EEPROM write cycle to complete
+    usleep(100000); // wait for EEPROM write cycle to complete
     return len;
 }
 
@@ -112,6 +121,7 @@ int main(int argc, char *argv[]) {
                 printf("\n");
             }
         }
+	printf("\n");
     }
 
     // Read data back from EEPROM and verify checksum
@@ -141,6 +151,15 @@ int main(int argc, char *argv[]) {
         close(file);
         return -1;
     }
+
+    printf("Data: ");
+    for (unsigned long i = 0; i < len; i++) {
+        printf("%02x ", read_data[i]);
+        if ((i + 1) % 16 == 0) {
+            printf("\n");
+        }
+    }
+    printf("\n");
 
     // Calculate CRC-32 checksum of read data
     uLong read_crc = crc32(0L, Z_NULL, 0);
