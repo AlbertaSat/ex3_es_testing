@@ -1,0 +1,7 @@
+//arch = zynq; split = false; format = BIN
+the_ROM_image:
+{
+	[bootloader]/home/jacques/workspace/cora_peripheral/export/cora_peripheral/sw/cora_peripheral/boot/fsbl.elf
+	/home/jacques/workspace/i2c_slave/_ide/bitstream/hardware_platform.bit
+	/home/jacques/workspace/i2c_slave/Debug/i2c_slave.elf
+}

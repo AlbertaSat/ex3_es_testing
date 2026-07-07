@@ -1,0 +1,138 @@
+/*
+
+Xilinx Vitis v2021.2.0 (64-bit) [Major: 2021, Minor: 2]
+SW Build 3363750 on 2021-10-16-13:10:08
+
+Process ID (PID): 971251
+License: Customer
+
+Current time: 	Fri Jun 19 13:25:44 MDT 2026
+Time zone: 	Mountain Standard Time (America/Edmonton)
+
+OS: Nobara release 43 (Forty Three)
+OS Version: 6.19.10-203.nobara.fc43.x86_64
+OS Architecture: amd64
+Available processors (cores): 24
+
+Display: localhost:10.0
+Screen size: 1920x1200
+Available screens: 1
+Available disk space: 105 GB
+
+Java version: 	11.0.11 64-bit
+Java home: 	/home/jacques/Xilinx/Vitis/2021.2/tps/lnx64/jre11.0.11_9
+Java executable location: 	/home/jacques/Xilinx/Vitis/2021.2/tps/lnx64/jre11.0.11_9/bin/java
+Java initial memory (-Xms): 	64 MB
+Java maximum memory (-Xmx):	 1,024 MB
+
+Java library paths: /home/jacques/Xilinx/Vitis/2021.2/tps/lnx64/javafx-sdk-11.0.2/lib:/home/jacques/Xilinx/Vitis/2021.2/lib/lnx64.o/Default:/home/jacques/Xilinx/Vitis/2021.2/lib/lnx64.o:/home/jacques/Xilinx/Vitis/2021.2/tps/lnx64/jre11.0.11_9/lib/:/home/jacques/Xilinx/Vitis/2021.2/tps/lnx64/jre11.0.11_9/lib//server:/home/jacques/Xilinx/Vitis/2021.2/lib/lnx64.o:/home/jacques/Xilinx/Vitis/2021.2/lib/lnx64.o/Default:/home/jacques/Xilinx/Vitis/2021.2/lib/lnx64.o:/home/jacques/Xilinx/Vitis/2021.2/tps/lnx64/python-3.8.3/lib:/home/jacques/Xilinx/Vitis/2021.2/aietools/lib/lnx64.o:/home/jacques/Xilinx/Vivado/2021.2/bin/../lnx64/tools/dot/lib:/home/jacques/Xilinx/Vitis/2021.2/bin/../lnx64/tools/dot/lib:/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib
+
+Java class paths: /home/jacques/Xilinx/Vitis/2021.2/eclipse/lnx64.o//plugins/org.eclipse.equinox.launcher_1.5.700.v20200207-2156.jar
+LD_LIBRARY_PATH: /home/jacques/Xilinx/Vitis
+
+User name: 	jacques
+User home directory: /home/jacques
+User working directory: /home/jacques/Repos/absat/ex3_es_testing/obc/i2c_4/helper
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: /home/jacques/Xilinx/Vitis
+HDI_APPROOT: /home/jacques/Xilinx/Vitis/2021.2
+RDI_DATADIR: /home/jacques/Xilinx/Vitis/2021.2/data
+RDI_BINDIR: /home/jacques/Xilinx/Vitis/2021.2/bin
+
+Vitis preferences directory: /home/jacques/.Xilinx/Vitis/2021.2/
+Vitis workspace directory: /home/jacques/workspace
+Vitis workspace log file location: /home/jacques/workspace/.metadata/.log
+Engine tmp dir: 	
+
+Xilinx Environment Variables
+----------------------------
+XILINX_DSP: 
+XILINX_HLS: /home/jacques/Xilinx/Vitis_HLS/2021.2
+XILINX_PLANAHEAD: /home/jacques/Xilinx/Vitis/2021.2
+XILINX_SDK: /home/jacques/Xilinx/Vitis/2021.2
+XILINX_VITIS: /home/jacques/Xilinx/Vitis/2021.2
+XILINX_VIVADO: /home/jacques/Xilinx/Vivado/2021.2
+XILINX_VIVADO_HLS: /home/jacques/Xilinx/Vivado/2021.2
+_RDI_DONT_SET_XILINX_AS_PATH: True
+
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+setTextField("cora_peripheral", "New Platform Project (Create new platform project)", "NewPlatformProjectWizard", "Text.PLATFORM_PROJECT_NAME");
+selectButton("Next", "New Platform Project (Create new platform project)", "NewPlatformProjectWizard", "Button.NEXT");
+selectButton("Browse", "New Platform Project (Platform)", "NewPlatformProjectWizard", "Button.BROWSE");
+setFileDialog("/home/jacques/Repos/absat/ex3_es_testing/obc/i2c_4/helper/cora_peripheral/hardware_platform.xsa", "Create Platform from XSA", "SDXFileDialog", "Button.OK");
+selectButton("Finish", "New Platform Project (Platform)", "NewPlatformProjectWizard", "Button.FINISH");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("cora_peripheral", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("File", "cora_peripheral", "WorkbenchWindow", "MenuItem.FILE");
+selectMenuItem("New", "cora_peripheral", "WorkbenchWindow", "MenuItem.NEW");
+selectMenuItem("Application Project", "cora_peripheral", "WorkbenchWindow", "MenuItem.APPLICATION_PROJECT");
+selectButton("Next", "New Application Project (Create a New Application Project)", "NewAppProjectWizard", "Button.NEXT");
+selectButton("Next", "New Application Project (Platform)", "NewAppProjectWizard", "Button.NEXT");
+selectButton("Back", "New Application Project (Application Project Details)", "NewAppProjectWizard", "Button.BACK");
+selectButton("Back", "New Application Project (Platform)", "NewAppProjectWizard", "Button.BACK");
+selectButton("Next", "New Application Project (Create a New Application Project)", "NewAppProjectWizard", "Button.NEXT");
+selectButton("Cancel", "New Application Project (Platform)", "NewAppProjectWizard", "Button.CANCEL");
+selectMenuItem("File", "cora_peripheral", "WorkbenchWindow", "MenuItem.FILE");
+selectMenuItem("New", "cora_peripheral", "WorkbenchWindow", "MenuItem.NEW");
+selectMenuItem("Application Project", "cora_peripheral", "WorkbenchWindow", "MenuItem.APPLICATION_PROJECT");
+selectButton("Next", "New Application Project (Create a New Application Project)", "NewAppProjectWizard", "Button.NEXT");
+selectButton("Next", "New Application Project (Platform)", "NewAppProjectWizard", "Button.NEXT");
+selectTable("Create new", "New Application Project (Application Project Details)", "NewAppProjectWizard", "Table");
+setTextField("i2c_slave", "New Application Project (Application Project Details)", "NewAppProjectWizard", "Text.APPLICATION_PROJECT_NAME");
+selectTable("Create new", "New Application Project (Application Project Details)", "NewAppProjectWizard", "Table");
+selectButton("Next", "New Application Project (Application Project Details)", "NewAppProjectWizard", "Button.NEXT");
+selectTable("standalone_domain", "New Application Project (Domain)", "NewAppProjectWizard", "Table");
+selectTable("Create new", "New Application Project (Domain)", "NewAppProjectWizard", "Table");
+selectTable("standalone_domain", "New Application Project (Domain)", "NewAppProjectWizard", "Table");
+selectButton("Next", "New Application Project (Domain)", "NewAppProjectWizard", "Button.NEXT");
+selectTreeTable("Empty Application", "Embedded software development templates", "New Application Project (Templates)", "NewAppProjectWizard", "TreeViewer.TemplateContentProvider");
+selectButton("Finish", "New Application Project (Templates)", "NewAppProjectWizard", "Button.FINISH");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("src", "i2c_slave_system > i2c_slave", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("New", "Explorer", "ProjectExplorer", "MenuItem.NEW");
+selectMenuItem("File", "i2c_slave", "WorkbenchWindow", "MenuItem.FILE");
+selectButton("Finish", "Create New File (File)", "BasicNewFileResourceWizard", "Button.FINISH");
+activateView("Assistant", "SDXAssistantView", "CTabItem.ASSISTANT");
+selectTreeTable("i2c_slave_system", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("Build Project", "Explorer", "ProjectExplorer", "MenuItem.BUILD_PROJECT");
+activateView("Console", "ConsoleView", "CTabItem.CONSOLE");
+activateView("Problems", "ProblemsView", "CTabItem.PROBLEMS");
+setText("13:34:26 **** Build of configuration Debug for proj", "Console", "ConsoleView", "StyledText");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("i2c_slave_system", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("Build Project", "Explorer", "ProjectExplorer", "MenuItem.BUILD_PROJECT");
+activateView("Console", "ConsoleView", "CTabItem.CONSOLE");
+selectToolBarMenuButton("Run", "i2c_slave", "WorkbenchWindow", "ToolItem.RUN");
+selectMenuItem("Run Configurations", "Console", "WorkbenchWindow", "MenuItem.RUN_CONFIGURATIONS");
+selectTree("C/C++ Application", "Run Configurations", "LaunchConfigurationsDialog", "Tree");
+selectButton("Close", "Run Configurations", "LaunchConfigurationsDialog", "Button.CLOSE");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("i2c_slave_system", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("Run As", "Explorer", "ProjectExplorer", "MenuItem.RUN_AS");
+selectMenuItem("1 Launch Hardware", "i2c_slave_system", "WorkbenchWindow", "MenuItem.1_LAUNCH_HARDWARE");
+selectMenuItem("Window", "i2c_slave_system", "WorkbenchWindow", "MenuItem.WINDOW");
+selectMenuItem("Show view", "i2c_slave_system", "WorkbenchWindow", "MenuItem.SHOW_VIEW");
+setTextField("target", "Show View", "ShowViewDialog", "Text");
+selectTree("Target Connections", "Xilinx", "Show View", "ShowViewDialog", "Tree.ApplicationImpl");
+selectButton("Open", "Show View", "ShowViewDialog", "Button.OPEN");
+activateView("Target Connections", "TargetManagement", "CTabItem.TARGET_CONNECTIONS");
+selectTreeTable("Hardware Server", "Target Connections", "TargetManagement", "TreeViewer.ViewContentProvider");
+selectTreeTable("Local", "Hardware Server", "Target Connections", "TargetManagement", "TreeViewer.ViewContentProvider");
+activateView("Vitis Log", "SdkLogView", "CTabItem.VITIS_LOG");
+activateView("Console", "ConsoleView", "CTabItem.CONSOLE");
+selectTreeTable("i2c_slave_system", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("Run As", "Explorer", "ProjectExplorer", "MenuItem.RUN_AS");
+selectMenuItem("1 Launch Hardware", "i2c_slave_system", "WorkbenchWindow", "MenuItem.1_LAUNCH_HARDWARE");
+activateView("Console", "ConsoleView", "CTabItem.CONSOLE");
+selectTreeTable("i2c_slave_system", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("Run As", "Explorer", "ProjectExplorer", "MenuItem.RUN_AS");
+selectMenuItem("1 Launch Hardware", "i2c_slave_system", "WorkbenchWindow", "MenuItem.1_LAUNCH_HARDWARE");
+selectButton("Cancel", "Warning", "MessageDialogWithToggle", "Button.CANCEL");
+selectTreeTable("i2c_slave_system", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
